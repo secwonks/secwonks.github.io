@@ -74,7 +74,7 @@ As an aside, we note that CERT originally published a warning containing the fol
 
 > The underlying vulnerability is primarily caused by CPU architecture design choices. Fully removing the vulnerability requires replacing vulnerable CPU hardware.
 
-(https://webcache.googleusercontent.com/search?q=cache:rzc6iQmgrIcJ:https://www.kb.cert.org/vuls/id/584653+&cd=1&hl=en&ct=clnk&gl=us)
+<https://webcache.googleusercontent.com/search?q=cache:rzc6iQmgrIcJ:https://www.kb.cert.org/vuls/id/584653+&cd=1&hl=en&ct=clnk&gl=us>
 
 The post was later updated to remove that quote. We’re not sure why. 
 
