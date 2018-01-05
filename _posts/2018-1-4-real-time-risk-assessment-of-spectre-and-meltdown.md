@@ -18,10 +18,10 @@ There is almost too much bad news for the defender to count, but one thing thatâ
 
 To start, we consider quick assessments by architecture design, using an arbitrary scale that is pretty-much meaningless (like most risk analysis) but will help us start to get our heads around the problem. Our scale from bad to worse is as follows.
 
-Meh
-Bad
-Really Bad
-Armageddon
+Meh \\
+Bad \\
+Really Bad \\
+Armageddon \\
 
 (What? We chose words that management and interns could understand viscerally and without a thesaurus. You have better?)
 
