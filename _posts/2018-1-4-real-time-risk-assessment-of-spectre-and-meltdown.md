@@ -79,11 +79,11 @@ As an aside, we note that CERT originally published a warning containing the fol
 The post was later updated to remove that quote. We’re not sure why. 
 
 References
-* https://meltdownattack.com/
-* https://spectreattack.com/
-* https://googleprojectzero.blogspot.co.at/2018/01/reading-privileged-memory-with-side.html
-* https://www.bleepingcomputer.com/news/security/mozilla-confirms-web-based-execution-vector-for-meltdown-and-spectre-attacks/
-* https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/
-* http://blog.cyberus-technology.de/posts/2018-01-03-meltdown.html
-* https://venturebeat.com/2018/01/04/cert-only-way-to-fix-meltdown-and-spectre-vulnerabilities-is-to-replace-cpu/
-* http://www.kb.cert.org/vuls/id/584653
+  * <https://meltdownattack.com/>
+  * <https://spectreattack.com/>
+  * <https://googleprojectzero.blogspot.co.at/2018/01/reading-privileged-memory-with-side.html>
+  * <https://www.bleepingcomputer.com/news/security/mozilla-confirms-web-based-execution-vector-for-meltdown-and-spectre-attacks/>
+  * <https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/>
+  * <http://blog.cyberus-technology.de/posts/2018-01-03-meltdown.html>
+  * <https://venturebeat.com/2018/01/04/cert-only-way-to-fix-meltdown-and-spectre-vulnerabilities-is-to-replace-cpu/>
+  * <http://www.kb.cert.org/vuls/id/584653>
