@@ -21,7 +21,7 @@ To start, we consider quick assessments by architecture design, using an arbitra
 Meh \\
 Bad \\
 Really Bad \\
-Armageddon \\
+Armageddon
 
 (What? We chose words that management and interns could understand viscerally and without a thesaurus. You have better?)
 
