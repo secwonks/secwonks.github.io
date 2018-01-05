@@ -92,3 +92,6 @@ References
   * <http://blog.cyberus-technology.de/posts/2018-01-03-meltdown.html>
   * <https://venturebeat.com/2018/01/04/cert-only-way-to-fix-meltdown-and-spectre-vulnerabilities-is-to-replace-cpu/>
   * <http://www.kb.cert.org/vuls/id/584653>
+
+Additional Resources
+  * <https://security.ias.edu/what-im-doing-about-meltdown-and-spectre>
