@@ -2,7 +2,7 @@
 # This file contains configuration flags to customize your site
 #
 
-theme: jekyll-theme-tactile
+remote_theme: jekyll-theme-tactile
 
 # Name of your site (displayed in the header)
 name: Security Wonks
@@ -75,7 +75,7 @@ sass:
   style: :expanded # You might prefer to minify using :compressed
 
 # Use the following plug-ins
-gems:
+plugins:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
 

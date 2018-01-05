@@ -58,6 +58,11 @@ If you are in a well-managed and locked-down shop with systems that are tidy, se
 
 Keep checking for updates for your browsers and other applications as well as for your OSes, and have your interns rotate admins passwords periodically.
 
+## Mobile Devices (Meh)
+Apple (iphones) and Google (android) have confirmed their devices are vulnerable to this attack, which makes sense given what we know from the authors.  This doesn’t seem to be the focus of the attack research right now however, and there isn’t much for a security or IT professional to do here except wait for the updates to roll out and push them when they do. 
+
+Tell your intern to buy you a flip phone as a backup.
+
 # Our Open Question
 
 The biggest question we wrestled with was: how scalable is this attack? Our instinct is the vulnerabilities are most beneficial in a targeted attack scenario, rather than a large-scale exploitation or exfiltration, based on the following assumptions:
