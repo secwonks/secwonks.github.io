@@ -8,9 +8,9 @@ We're the Security Wonks. A group of grizzled security folk with backgrounds in 
 
 We're just getting this off the ground so please wipe your feet on the way in.
 
-Contact via email at <secwonks@gmail.com>
+Contact us via email at <secwonks@gmail.com>
 
-If you see a signed communication from us or want to send us an ecrypted message here's our key:
+If you see a signed communication from us or want to send us an encrypted message here's our key:
 
     -----BEGIN PGP PUBLIC KEY BLOCK-----
     Version: GnuPG v1
