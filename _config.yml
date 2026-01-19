@@ -9,7 +9,7 @@ url: https://secwonks.org
 baseurl: ""
 
 # Theme (GitHub Pages supported)
-remote_theme: jekyll-theme-tactile
+remote_theme: jekyll-theme-slate
 
 # Branding
 avatar: https://secwonks.org/images/secwonks.png
