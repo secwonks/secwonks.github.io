@@ -6,7 +6,7 @@ baseurl: ""
 url: "https://secwonks.org"
 
 # Author
-author: Warren Raquel
+author:
   name: Security Wonks
 
 # Build settings
