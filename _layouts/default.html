@@ -28,12 +28,19 @@
         </div>
         Security Wonks
       </a>
-      <nav class="site-nav">
+      <nav class="site-nav" id="site-nav">
         <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
         <a href="{{ '/blog/' | relative_url }}" {% if page.url contains '/blog' %}class="active"{% endif %}>Blog</a>
         <a href="{{ '/slack/' | relative_url }}" {% if page.url == '/slack/' %}class="active"{% endif %}>Slack</a>
         <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>About</a>
       </nav>
+
+      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
@@ -52,9 +59,34 @@
       </div>
     </div>
   </footer>
-<script>
-  MathJax = { tex: { inlineMath: [['$','$']] } };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <!-- Burger menu -->
+  <script>
+    const burger = document.getElementById('burger');
+    const nav    = document.getElementById('site-nav');
+    burger.addEventListener('click', function () {
+      const open = nav.classList.toggle('is-open');
+      burger.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', open);
+    });
+    // Close menu when a nav link is tapped
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        nav.classList.remove('is-open');
+        burger.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', false);
+      });
+    });
+  </script>
+
+  <!-- MathJax -->
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$','$'], ['\\(','\\)']] },
+      startup: { typeset: true }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
 </body>
 </html>
