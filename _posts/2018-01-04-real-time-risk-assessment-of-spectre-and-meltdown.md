@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Real-time Risk Assessment of Spectre and Meltdown
+date: 2018-01-04
+category: Threats & Incidents
 ---
 
 If you are a security professional who is currently in possession of a pulse, you have undoubtedly heard about the recent CPU bugs dubbed [Spectre](https://spectreattack.com/) and [Meltdown](https://meltdownattack.com/). We hate vanity names for vulnerabilities, but it’s clearly the way of the future, so we’re going with it.

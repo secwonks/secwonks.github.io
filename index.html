@@ -1,18 +1,68 @@
 ---
 layout: default
+title: Home
 ---
 
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__rule">
+    <span>Est. 2017</span>
+  </div>
 
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+  <p class="hero__eyebrow">Zero Trust. Full Gossip.</p>
 
-      <div class="entry">
-        {{ post.excerpt }}
+  <h1 class="hero__title">
+    <span class="title-accent">SecWonks</span>
+  </h1>
+
+  <p class="hero__subtitle">Retired from Higher Ed. Not from Opinions.”</p>
+
+  <blockquote class="hero__mission">
+    A trusted community of Higher Education security professionals — past and present — dedicated to connection, conversation, and continued collaboration beyond the campus walls.
+  </blockquote>
+
+  <a href="/blog/" class="hero__cta">
+    Read the Blog <span class="arrow">→</span>
+  </a>
+</section>
+
+<hr class="section-divider" />
+
+<!-- LATEST POST -->
+{% assign latest_post = site.posts.first %}
+{% if latest_post %}
+<section class="latest-post-section">
+  <div class="section-header">
+    <h2 class="section-title">Latest from the <span>Field Notes</span></h2>
+    <a href="{{ '/blog/' | relative_url }}" class="section-link">All posts →</a>
+  </div>
+
+  <article class="post-card--featured">
+    <div class="post-card__label">
+      <span class="label-tag">Latest</span>
+      <div>
+        <div class="label-issue">#{{ site.posts.size | prepend: '0' | slice: -2, 2 }}</div>
+        <div class="label-date">{{ latest_post.date | date: "%b %d, %Y" }}</div>
       </div>
-
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
-</div>
+    </div>
+    <div class="post-card__body">
+      <h3 class="post-card__title">
+        <a href="{{ latest_post.url | relative_url }}">{{ latest_post.title }}</a>
+      </h3>
+      <p class="post-card__excerpt">
+        {% if latest_post.description %}
+          {{ latest_post.description }}
+        {% else %}
+          {{ latest_post.excerpt | strip_html | truncatewords: 55 }}
+        {% endif %}
+      </p>
+      <div class="post-card__footer">
+        {% if latest_post.author %}<span>{{ latest_post.author }}</span>{% endif %}
+        <a href="{{ latest_post.url | relative_url }}" class="post-card__read-more">
+          Continue Reading <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </article>
+</section>
+{% endif %}

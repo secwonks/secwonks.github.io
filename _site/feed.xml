@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-03-12T12:52:02-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Security Wonks</title><subtitle>A collective of security professionals dedicated to advancing the field  through research, discourse, and community.</subtitle><author><name>Security Wonks</name></author><entry><title type="html">A Little House Cleaning</title><link href="http://localhost:4000/blog/2026/02/13/a-little-house-cleaning/" rel="alternate" type="text/html" title="A Little House Cleaning" /><published>2026-02-13T00:00:00-06:00</published><updated>2026-02-13T00:00:00-06:00</updated><id>http://localhost:4000/blog/2026/02/13/a-little-house-cleaning</id><content type="html" xml:base="http://localhost:4000/blog/2026/02/13/a-little-house-cleaning/"><![CDATA[<h2 id="were-bringing-sqrt1--tan2-c-back">We’re Bringing $\sqrt{1 + \tan^2 c}$ Back</h2>
+
+<p>🎤 <em>taps microphone</em></p>
+
+<p>Hello, is this thing on?</p>
+
+<p>In 2017 we started up a Slack Workspace called SecWonks. It was intended to be a refuge for Higher Ed security professionals both active and former to be able to keep in touch and talk socially apart from the more rigorous (and oft restricted) trust groups.</p>
+
+<p>The idea was that if you left Higher Ed but still wanted to keep in touch with the community, this could be a safe space for that.</p>
+
+<p>Well, it’s 2026 and we’re coming up on the 9 year mark for this group. The web site has been in cold storage since, well, as you can see, about January of 2018 during the Spectre and Meltdown incidents.</p>
+
+<p>We’re going to try to start spinning the wheels again on the blog and see if we can get some traction. In the meantime, the Slack Workspace is still active so if you want to join just contact an existing member for an invite or email us at <a href="mailto:secwonks@protonmail.com">secwonks@protonmail.com</a>.</p>]]></content><author><name>W. Raquel</name></author><category term="Community" /><summary type="html"><![CDATA[We're taking off the dust covers and opening the blinds. Watch out here we come.]]></summary></entry><entry><title type="html">Real-time Risk Assessment of Spectre and Meltdown</title><link href="http://localhost:4000/blog/2018/01/04/real-time-risk-assessment-of-spectre-and-meltdown/" rel="alternate" type="text/html" title="Real-time Risk Assessment of Spectre and Meltdown" /><published>2018-01-04T00:00:00-06:00</published><updated>2018-01-04T00:00:00-06:00</updated><id>http://localhost:4000/blog/2018/01/04/real-time-risk-assessment-of-spectre-and-meltdown</id><content type="html" xml:base="http://localhost:4000/blog/2018/01/04/real-time-risk-assessment-of-spectre-and-meltdown/"><![CDATA[<p>If you are a security professional who is currently in possession of a pulse, you have undoubtedly heard about the recent CPU bugs dubbed <a href="https://spectreattack.com/">Spectre</a> and <a href="https://meltdownattack.com/">Meltdown</a>. We hate vanity names for vulnerabilities, but it’s clearly the way of the future, so we’re going with it.</p>
+
+<p>If you have not yet heard of these vulnerabilities, or you feel like you don’t have the basics down, stop reading and go do your homework. Seriously. And have a drink handy. It’s a bit terrifying.</p>
+
+<p>We have not written this post to terrify you, nor to explain the basics of the vulnerabilities. We instead attempt to provide a summary aimed at IT or security professionals who are trying to wrap their head around the high-level impact of such vulnerabilities and determine what they should do about them. We also hope to help our peers understand how to articulate and quantify the risk of such things to their executive management. We will try to cut through the FUD and give our honest opinion of the risk resulting from these issues.</p>
+
+<p>Note that our opinions are based on the information we’ve reviewed at the time of this writing.  We have not reviewed all information out there, and there is likely to be more still coming. As time permits and circumstances warrant, we will update this post appropriately.</p>
+
+<h1 id="assessment-of-impact">Assessment of Impact</h1>
+<p>At a high level, both vulnerabilities allow for the leak (or exfiltration) of data that a process should not normally have access to. The bad news for the attacker (and good news for the defender) is that you don’t necessarily know what data you’re getting - it’s difficult to just pull a password out of memory, for example. (To do this, one would have to dump a bunch of memory and then figure out what to do with it later.) The other bad news for the attacker is that the mileage of these vulnerabilities seems to vary by OS, CPU architecture, and perhaps a few other factors. It is not clear to us how significant this variance is on the ease of exploitability or exfiltration of data.</p>
+
+<p>There is almost too much bad news for the defender to count, but one thing that’s particularly significant - as noted in the vulnerability site - is that <em>no security controls you currently have in place are likely to be at all useful against this vulnerability</em>. Your AV, Next-Gen AV, host-based IDS, and EDR are all going to miss this for a while. Also, you’re not going to get any useful logs about it, and your network-based IDS probably won’t have anything to hold on to.</p>
+
+<p>To start, we consider quick assessments by architecture design, using an arbitrary scale that is pretty-much meaningless (like most risk analysis) but will help us start to get our heads around the problem. Our scale from bad to worse is as follows.</p>
+
+<p>Meh <br />
+Bad <br />
+Really Bad <br />
+Armageddon</p>
+
+<p>(What? We chose words that management and interns could understand viscerally and without a thesaurus. You have better?)</p>
+
+<h2 id="multi-user-servers-really-bad">Multi-user servers (Really Bad)</h2>
+<p>The implications are very bad for any server infrastructure which is multi-user by design and allows users to run code. This includes *nix systems with user logins, Citrix environments, terminal services, and anything else like that. In these cases, you should view the vulnerability as you would the worst possible privilege escalation vulnerability you’ve ever seen and rate the risk appropriately.</p>
+
+<p>We think you should patch these ASAP. Like, keep refreshing Windows Update and get your intern to do it while you sleep.</p>
+
+<h2 id="general-purpose-servers-bad">General-purpose servers (Bad)</h2>
+<p>Servers running services that do not easily allow users to execute code - mail servers, file servers, or database servers - are likely to be less of an issue on their own. It’s hard for us to see how one would easily exploit such environments. But these vulnerabilities are much worse when chained with another vulnerability that would allow some kind of local, unprivileged code execution. If so, you’re back at this being the mother of all privilege escalation bugs.</p>
+
+<p>So we still think you should patch these, but we wouldn’t make them your top priority. You can send your intern to get you a latte.</p>
+
+<h2 id="virtual-environments-armageddon">Virtual Environments (Armageddon)</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RkGUowLRF5s?rel=0&amp;start=14" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
+
+<p>For virtualized environments that are using virtualization as a security boundary, these vulnerabilities are absolutely awful. They represent a complete dissolution, at the most foundational level, of any security boundary one could hope to put in place in a multi-tenant environment. No boundary could keep virtual system A from stealing data from virtual system B, if such systems share physical hardware. This does still require the ability to execute code on a virtual system somewhere though, and it’s also likely to be a fair bit of work.</p>
+
+<p>We believe the biggest risk is from a targeted attack against an environment with a virtual footprint where systems of different criticality are mixed together (i.e., you have your publicly facing virtual web server running on the same hardware as your crown jewels backend database and are relying on virtualization to keep them isolated). If you are in that boat - or working in any private cloud or virtual environment that is large-scale or core to your business - you should be patching with all due haste. For the attacker, jumping trust boundaries in a virtual environment just got a whole lot easier.</p>
+
+<p>We suggest these environments be your first priority. Hire an extra intern to check those updates.</p>
+
+<h2 id="cloud-environments-meh">Cloud Environments (Meh)</h2>
+<p>There’s a lot of focus on cloud providers, but we believe those environments may be less critical than individual corporate virtual environments. With large cloud providers, it is difficult to discern who you are sharing physical hardware with, so effectively compromising a specific target and getting anything useful might be difficult. There is also a <em>lot</em> of memory to work with in a large cloud provider, making it harder to find needles in the memory haystacks. Finally, these providers appear to have been working behind the scenes ahead of the release date to mitigate the vulnerability. Even if they hadn’t, these organizations have personnel dedicated to dealing with exactly this class of problem, which you probably don’t have in your VMWare installation. Also, there isn’t much you will be able to do about this on behalf of your cloud provider, other than leaving them.</p>
+
+<p>We suggest you sit back here and let them do their thing. Send your intern to Kubernetes training.</p>
+
+<h2 id="general-purpose-endpoints-desktops-laptops-etc-really-bad">General purpose endpoints, desktops, laptops, etc. (Really Bad)</h2>
+<p>For general endpoints, we believe these vulnerabilities are bad, though not as bad as with the server side. In the modern era, most client-side compromises stem from phishing and/or an exploit of an old unpatched instance of a browser, Java, Microsoft Office, or Adobe product, and this doesn’t do much to change any of that.</p>
+
+<p>The exception is remote exfiltration via browser JavaScript. <a href="https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/">Mozilla confirmed</a> the possibility of remote theft of passwords, cookies, and other client secret data. This is presumably possible just by having your browser point to a malicious site. It is worse than a classic phishing attack though, because there’s no other tool or software to exploit, there’s no mitigation from AV or any other security function, and there’s no record this happened to you. The attacker doesn’t need their victim to download or run any code which they hope they can get past the client’s antivirus; they just need the victim’s browser to hit a site.</p>
+
+<p>If you are in a well-managed and locked-down shop with systems that are tidy, secured, and up-to-date, this is game-changing for you and you should probably prioritize patching ASAP. If you are in a decentralized, unmanaged, or otherwise insecure environment - we’re looking at you large biz still running old Java for your horrible procurement application - this doesn’t make your life any worse.</p>
+
+<p>Keep checking for updates for your browsers and other applications as well as for your OSes, and have your interns rotate admins passwords periodically.</p>
+
+<h2 id="mobile-devices-meh">Mobile Devices (Meh)</h2>
+<p>Apple (iphones) and Google (android) have confirmed their devices are vulnerable to this attack, which makes sense given what we know from the authors.  This doesn’t seem to be the focus of the attack research right now however, and there isn’t much for a security or IT professional to do here except wait for the updates to roll out and push them when they do.</p>
+
+<p>Tell your intern to buy you a flip phone as a backup.</p>
+
+<h1 id="our-open-question">Our Open Question</h1>
+
+<p>The biggest question we wrestled with was: how scalable is this attack? Our instinct is the vulnerabilities are most beneficial in a targeted attack scenario, rather than a large-scale exploitation or exfiltration, based on the following assumptions:</p>
+
+<ul>
+  <li>There seems to be a lot of variability in the targets that can affect exploitation (OS, patch level, specific details of chipset, etc.).</li>
+  <li>Exfiltration is generally untargeted - unless you know precisely where the data you want is in memory (and you probably don’t), you have to dump everything and sift through it later. This is fine for a small number of targeted systems but becomes unwieldy at 100,000+ victims (though it was pointed out data discovery tools could help with this).</li>
+  <li>You are reading memory, not making changes to running systems, which would make worm/auto-propagation more difficult (though theoretically not impossible).</li>
+</ul>
+
+<p>But we are not particularly confident in this conclusion and eagerly await new information to help shed light on the matter.</p>
+
+<p>So, for now, don’t freak out unless you have to, keep an eye (or an intern’s eye) on the breaking analysis and software updates, and start thinking about dusting off that old DEC Alpha or SPARC sitting in your closet.</p>
+
+<p>As an aside, we note that CERT originally published a warning containing the following quote:</p>
+
+<blockquote>
+  <p>The underlying vulnerability is primarily caused by CPU architecture design choices. Fully removing the vulnerability requires replacing vulnerable CPU hardware.</p>
+</blockquote>
+
+<p><a href="https://webcache.googleusercontent.com/search?q=cache:rzc6iQmgrIcJ:https://www.kb.cert.org/vuls/id/584653+&amp;cd=1&amp;hl=en&amp;ct=clnk&amp;gl=us">https://webcache.googleusercontent.com/search?q=cache:rzc6iQmgrIcJ:https://www.kb.cert.org/vuls/id/584653+&amp;cd=1&amp;hl=en&amp;ct=clnk&amp;gl=us</a></p>
+
+<p>The post was later updated to remove that quote. We’re not sure why.</p>
+
+<p>References</p>
+<ul>
+  <li><a href="https://meltdownattack.com/">https://meltdownattack.com/</a></li>
+  <li><a href="https://spectreattack.com/">https://spectreattack.com/</a></li>
+  <li><a href="https://googleprojectzero.blogspot.co.at/2018/01/reading-privileged-memory-with-side.html">https://googleprojectzero.blogspot.co.at/2018/01/reading-privileged-memory-with-side.html</a></li>
+  <li><a href="https://www.bleepingcomputer.com/news/security/mozilla-confirms-web-based-execution-vector-for-meltdown-and-spectre-attacks/">https://www.bleepingcomputer.com/news/security/mozilla-confirms-web-based-execution-vector-for-meltdown-and-spectre-attacks/</a></li>
+  <li><a href="https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/">https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/</a></li>
+  <li><a href="http://blog.cyberus-technology.de/posts/2018-01-03-meltdown.html">http://blog.cyberus-technology.de/posts/2018-01-03-meltdown.html</a></li>
+  <li><a href="https://venturebeat.com/2018/01/04/cert-only-way-to-fix-meltdown-and-spectre-vulnerabilities-is-to-replace-cpu/">https://venturebeat.com/2018/01/04/cert-only-way-to-fix-meltdown-and-spectre-vulnerabilities-is-to-replace-cpu/</a></li>
+  <li><a href="http://www.kb.cert.org/vuls/id/584653">http://www.kb.cert.org/vuls/id/584653</a></li>
+</ul>
+
+<p>Additional Resources</p>
+<ul>
+  <li><a href="https://security.ias.edu/what-im-doing-about-meltdown-and-spectre">https://security.ias.edu/what-im-doing-about-meltdown-and-spectre</a></li>
+</ul>]]></content><author><name>Security Wonks</name></author><category term="Threats &amp; Incidents" /><summary type="html"><![CDATA[If you are a security professional who is currently in possession of a pulse, you have undoubtedly heard about the recent CPU bugs dubbed Spectre and Meltdown. We hate vanity names for vulnerabilities, but it’s clearly the way of the future, so we’re going with it.]]></summary></entry></feed>

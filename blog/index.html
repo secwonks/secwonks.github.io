@@ -1,0 +1,41 @@
+---
+layout: default
+title: Blog
+description: Front Porch — analysis, research, and commentary from Security Wonks.
+---
+
+<div class="blog-page">
+  <div class="blog-page__header">
+    <h1>Front Porch</h1>
+    <p>Analysis, research, and commentary from the Security Wonks collective.</p>
+    <p style="font-style: italic; font-size: 0.9rem; color: var(--text-muted);">Stay off the lawn.</p>
+  </div>
+
+  <div class="post-list">
+    {% for post in site.posts %}
+    <article class="post-list-item">
+      <div class="post-list-item__meta">
+        <span class="meta-date">{{ post.date | date: "%b %d, %Y" }}</span>
+        {% if post.category %}
+          <span class="meta-tag">{{ post.category }}</span>
+        {% endif %}
+      </div>
+      <div class="post-list-item__content">
+        <h2 class="post-list-item__title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+        <p class="post-list-item__excerpt">
+          {% if post.description %}
+            {{ post.description }}
+          {% else %}
+            {{ post.excerpt | strip_html | truncatewords: 40 }}
+          {% endif %}
+        </p>
+        <a href="{{ post.url | relative_url }}" class="post-list-item__read-more">
+          Read more →
+        </a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
