@@ -22,8 +22,8 @@
   --blue:           #0a7abf;   /* deeper sky blue - readable on white */
   --blue-light:     #0560a0;   /* darker on hover for contrast */
   --blue-dim:       #b8d4e8;   /* very light blue for tag fills */
-  --crimson:        #e8f0f8;   /* light tint accent */
-  --crimson-bright: #ddeaf5;   /* slightly richer tint */
+  --tint:           #e8f0f8;   /* light tint accent */
+  --tint-bright:    #ddeaf5;   /* slightly richer tint */
 
   --font-display:   'Playfair Display', Georgia, serif;
   --font-body:      'Libre Baskerville', Georgia, serif;
@@ -727,10 +727,85 @@ p { margin-bottom: 1.25rem; }
 }
 
 /* ========================================
+   BURGER BUTTON
+   ======================================== */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 200;
+
+  span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 0.25s ease, opacity 0.2s ease, width 0.25s ease;
+  }
+
+  &.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  &.is-open span:nth-child(2) { opacity: 0; width: 0; }
+  &.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+/* ========================================
    RESPONSIVE
    ======================================== */
 @media (max-width: 768px) {
   .hero { padding: 4rem 1.5rem 3rem; }
-  .site-nav { display: none; }
   .latest-post-section { padding: 3rem 1.5rem; }
+
+  .burger { display: flex; }
+
+  .site-nav {
+    /* Hidden state — slide up off-screen */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+
+    a {
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      padding: 1rem 1.75rem;
+      border-bottom: 1px solid var(--border);
+      border-left: 3px solid transparent;
+
+      &:last-child { border-bottom: none; }
+      &:hover, &.active {
+        border-left-color: var(--blue);
+        background: var(--bg-secondary);
+        color: var(--blue);
+      }
+    }
+
+    /* Open state */
+    &.is-open {
+      max-height: 300px;
+      padding: 0.25rem 0;
+    }
+  }
+
+  /* Make header position:relative so nav drops below it */
+  .site-header { position: sticky; }
+  .site-header__inner { position: relative; }
 }
