@@ -3,10 +3,10 @@ description: >-
   A collective of security professionals dedicated to advancing the field 
   through research, discourse, and community.
 baseurl: ""
-url: "https://yourdomain.com"
+url: "https://secwonks.org"
 
 # Author
-author:
+author: Warren Raquel
   name: Security Wonks
 
 # Build settings
@@ -34,3 +34,4 @@ exclude:
   - Gemfile.lock
   - node_modules
   - README.md
+  - categories
